@@ -86,24 +86,47 @@ class ReadConfig:
       False if input files have been tempered with and they don't mind missing
       records or have too many of them.
   """
-  # General tf.data.Dataset parametters
-  options: tf.data.Options = dataclasses.field(default_factory=tf.data.Options)
-  try_autocache: bool = True
-  add_tfds_id: bool = False
-  # tf.data.Dataset.shuffle parameters
-  shuffle_seed: Optional[int] = None
-  shuffle_reshuffle_each_iteration: Optional[bool] = None
-  # Interleave parameters
-  # Ideally, we should switch interleave values to None to dynamically set
-  # those value depending on the user system. However, this would make the
-  # generation order non-deterministic accross machines.
-  interleave_cycle_length: Union[Optional[int], _MISSING] = MISSING
-  interleave_block_length: Optional[int] = 16
-  input_context: Optional[tf.distribute.InputContext] = None
-  experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
-  skip_prefetch: bool = False
-  num_parallel_calls_for_decode: Optional[int] = tf.data.experimental.AUTOTUNE
-  num_parallel_calls_for_interleave_files: Optional[int] = (
-      tf.data.experimental.AUTOTUNE)
-  enable_ordering_guard: bool = True
-  assert_cardinality: bool = True
+
+  def __init__(
+      self,
+      # General tf.data.Dataset parametters
+      options: Optional[tf.data.Options] = None,
+      try_autocache: bool = True,
+      add_tfds_id: bool = False,
+      # tf.data.Dataset.shuffle parameters
+      shuffle_seed: Optional[int] = None,
+      shuffle_reshuffle_each_iteration: Optional[bool] = None,
+      # Interleave parameters
+      # Ideally, we should switch interleave values to None to dynamically set
+      # those value depending on the user system. However, this would make the
+      # generation order non-deterministic accross machines.
+      interleave_cycle_length: Union[Optional[int], _MISSING] = MISSING,
+      interleave_block_length: Optional[int] = 16,
+      input_context: Optional[tf.distribute.InputContext] = None,
+      experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None,
+      skip_prefetch: bool = False,
+      num_parallel_calls_for_decode: Optional[int] = None,
+      num_parallel_calls_for_interleave_files: Optional[int] = None,
+      enable_ordering_guard: bool = True,
+      assert_cardinality: bool = True,
+  ):
+    self.options = options or tf.data.Options()
+    self.try_autocache = try_autocache
+    self.add_tfds_id = add_tfds_id
+    self.shuffle_seed = shuffle_seed
+    self.shuffle_reshuffle_each_iteration = shuffle_reshuffle_each_iteration
+    self.interleave_cycle_length = interleave_cycle_length
+    self.interleave_block_length = interleave_block_length
+    self.input_context = input_context
+    self.experimental_interleave_sort_fn = experimental_interleave_sort_fn
+    self.skip_prefetch = skip_prefetch
+    if num_parallel_calls_for_decode is None:
+      self.num_parallel_calls_for_decode = tf.data.experimental.AUTOTUNE
+    else:
+      self.num_parallel_calls_for_decode = num_parallel_calls_for_decode
+    if num_parallel_calls_for_interleave_files is None:
+      self.num_parallel_calls_for_interleave_files = tf.data.experimental.AUTOTUNE
+    else:
+      self.num_parallel_calls_for_interleave_files = num_parallel_calls_for_interleave_files
+    self.enable_ordering_guard = enable_ordering_guard
+    self.assert_cardinality = assert_cardinality
