@@ -53,7 +53,7 @@ class Audio(tensor_feature.Tensor):
       *,
       file_format: Optional[str] = None,
       shape: utils.Shape = (None,),
-      dtype: tf.dtypes.DType = tf.int64,
+      dtype: Optional[tf.dtypes.DType] = None,
       sample_rate: Optional[int] = None,
       encoding: Union[str, Encoding] = Encoding.NONE,
       doc: feature_lib.DocArg = None,
@@ -72,6 +72,8 @@ class Audio(tensor_feature.Tensor):
         values.
       doc: Documentation of this feature (e.g. description).
     """
+    if dtype is None:
+      dtype = tf.int64
     self._file_format = file_format
     if len(shape) > 2:
       raise ValueError('Audio shape should be either (length,) or '

@@ -39,13 +39,14 @@ _is_gcs_disabled = False
 # * FailedPreconditionError: (e.g. no internet)
 # * PermissionDeniedError: Some environments block GCS access.
 # * AbortedError: All 10 retry attempts failed.
-GCS_UNAVAILABLE_EXCEPTIONS = (
-    OSError,
-    tf.errors.UnimplementedError,
-    tf.errors.FailedPreconditionError,
-    tf.errors.PermissionDeniedError,
-    tf.errors.AbortedError,
-)
+def gcs_unavailable_exceptions():
+  return (
+      OSError,
+      tf.errors.UnimplementedError,
+      tf.errors.FailedPreconditionError,
+      tf.errors.PermissionDeniedError,
+      tf.errors.AbortedError,
+  )
 
 
 def gcs_path(*relative_path: epath.PathLike) -> epath.Path:
@@ -72,7 +73,7 @@ def exists(path: epath.Path) -> bool:
   """Checks if path exists. Returns False if issues occur connecting to GCS."""
   try:
     return path.exists()
-  except GCS_UNAVAILABLE_EXCEPTIONS:  # pylint: disable=catching-non-exception
+  except gcs_unavailable_exceptions():  # pylint: disable=catching-non-exception
     return False
 
 

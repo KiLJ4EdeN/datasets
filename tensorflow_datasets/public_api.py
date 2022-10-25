@@ -15,11 +15,6 @@
 
 """Public API of tfds, without the registered dataset."""
 
-# pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
-from tensorflow_datasets.core import tf_compat
-
-tf_compat.ensure_tf_install()
-
 from tensorflow_datasets import core
 from tensorflow_datasets import typing
 from tensorflow_datasets.core import beam_utils as beam

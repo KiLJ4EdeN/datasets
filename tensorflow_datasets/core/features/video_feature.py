@@ -98,7 +98,7 @@ class Video(sequence_feature.Sequence):
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
-      dtype=tf.uint8,
+      dtype: Optional[Union[tf.uint8, tf.uint16]] = None,
       doc: feature_lib.DocArg = None,
   ):
     """Initializes the connector.
@@ -121,6 +121,8 @@ class Video(sequence_feature.Sequence):
     Raises:
       ValueError: If the shape is invalid
     """
+    if dtype is None:
+      dtype = tf.uint8
     shape = tuple(shape)
     if len(shape) != 4:
       raise ValueError('Video shape should be of rank 4')
