@@ -13,18 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""AccentDB dataset."""
+"""Test for AG News dataset."""
 
-from tensorflow_datasets.audio import accentdb
-import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.ag_news_subset import ag_news_subset_dataset_builder
 
 
-class AccentdbTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = accentdb.Accentdb
+class AgNewsSubsetTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ag_news_subset_dataset_builder.Builder
   SPLITS = {
-      "train": 1,
+      "train": 3,  # Number of fake train examples
+      "test": 2,  # Number of fake test examples
   }
+  DL_EXTRACT_RESULT = {"ag_news_csv": ""}
 
 
 if __name__ == "__main__":
-  tfds.testing.test_main()
+  testing.test_main()
