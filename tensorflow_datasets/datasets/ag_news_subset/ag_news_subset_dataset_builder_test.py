@@ -13,21 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for the ai2_arc dataset."""
+"""Test for AG News dataset."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering import ai2_arc
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.ag_news_subset import ag_news_subset_dataset_builder
 
 
-class Ai2ArcTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ai2_arc.Ai2Arc
-  BUILDER_CONFIG_NAMES_TO_TEST = ["ARC-Easy"]
+class AgNewsSubsetTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ag_news_subset_dataset_builder.Builder
   SPLITS = {
-      "train": 3,
-      "validation": 3,
-      "test": 3,
+      "train": 3,  # Number of fake train examples
+      "test": 2,  # Number of fake test examples
   }
+  DL_EXTRACT_RESULT = {"ag_news_csv": ""}
 
 
 if __name__ == "__main__":
-  tfds.testing.test_main()
+  testing.test_main()
