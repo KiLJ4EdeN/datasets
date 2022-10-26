@@ -13,23 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for ANLI dataset module."""
+"""Tests for the ai2_arc_with_ir dataset."""
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.text import anli
+from tensorflow_datasets.datasets.ai2_arc_with_ir import ai2_arc_with_ir_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-class AnliTest(testing.DatasetBuilderTestCase):
-
-  BUILDER_CONFIG_NAMES_TO_TEST = ["r3"]
-
-  DATASET_CLASS = anli.Anli
+class Ai2ArcWithIRTest(tfds.testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ai2_arc_with_ir_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ["ARC-Challenge-IR"]
   SPLITS = {
-      "validation": 2,  # Number of fake validation examples
-      "test": 2,  # Number of fake test examples
-      "train": 2,  # Number of fake train examples
+      "train": 2,
+      "validation": 2,
+      "test": 2,
   }
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()

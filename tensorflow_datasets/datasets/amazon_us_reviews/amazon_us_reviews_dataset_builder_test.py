@@ -13,19 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for AG News dataset."""
+"""Tests for amazon_us_reviews dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import ag_news_subset
+from tensorflow_datasets.datasets.amazon_us_reviews import amazon_us_reviews_dataset_builder
 
 
-class AgNewsSubsetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ag_news_subset.AGNewsSubset
+class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = amazon_us_reviews_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ["Apparel_v1_00"]
   SPLITS = {
-      "train": 3,  # Number of fake train examples
-      "test": 2,  # Number of fake test examples
+      "train": 5,
   }
-  DL_EXTRACT_RESULT = {"ag_news_csv": ""}
+
+  DL_EXTRACT_RESULT = "test.tsv"
 
 
 if __name__ == "__main__":

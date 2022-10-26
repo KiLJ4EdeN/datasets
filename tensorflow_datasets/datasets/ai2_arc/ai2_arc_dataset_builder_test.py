@@ -13,16 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""AccentDB dataset."""
+"""Tests for the ai2_arc dataset."""
 
-from tensorflow_datasets.audio import accentdb
+from tensorflow_datasets.datasets.ai2_arc import ai2_arc_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class AccentdbTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = accentdb.Accentdb
+class Ai2ArcTest(tfds.testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ai2_arc_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ["ARC-Easy"]
   SPLITS = {
-      "train": 1,
+      "train": 3,
+      "validation": 3,
+      "test": 3,
   }
 
 
