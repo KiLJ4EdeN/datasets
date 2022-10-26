@@ -13,26 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""assin2 dataset."""
+"""Test for AG News dataset."""
 
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.assin2 import assin2
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.ag_news_subset import ag_news_subset_dataset_builder
 
 
-class Assin2Test(tfds.testing.DatasetBuilderTestCase):
-  """Tests for assin2 dataset."""
-  DATASET_CLASS = assin2.Assin2
+class AgNewsSubsetTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ag_news_subset_dataset_builder.Builder
   SPLITS = {
-      'train': 5,
-      'validation': 5,
-      'test': 5,
+      "train": 3,  # Number of fake train examples
+      "test": 2,  # Number of fake test examples
   }
-  DL_EXTRACT_RESULT = {
-      'train': 'assin2-train-only.xml',
-      'validation': 'assin2-dev.xml',
-      'test': 'assin2-test.xml'
-  }
+  DL_EXTRACT_RESULT = {"ag_news_csv": ""}
 
 
-if __name__ == '__main__':
-  tfds.testing.test_main()
+if __name__ == "__main__":
+  testing.test_main()

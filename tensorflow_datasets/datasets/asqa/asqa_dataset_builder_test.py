@@ -13,20 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.video.bair_robot_pushing."""
+"""asqa dataset."""
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.video import bair_robot_pushing
+from tensorflow_datasets.datasets.asqa import asqa_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-class BairRobotPushingTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = bair_robot_pushing.BairRobotPushingSmall
-
+class AsqaTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for asqa dataset."""
+  DATASET_CLASS = asqa_dataset_builder.Builder
   SPLITS = {
-      "train": 1,
-      "test": 1,
+      'train': 2,
+      'dev': 1,
   }
 
+  DL_EXTRACT_RESULT = 'ASQA.json'
 
-if __name__ == "__main__":
-  testing.test_main()
+
+if __name__ == '__main__':
+  tfds.testing.test_main()

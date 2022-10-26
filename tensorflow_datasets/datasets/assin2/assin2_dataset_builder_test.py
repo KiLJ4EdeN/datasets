@@ -13,21 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for the ai2_arc dataset."""
+"""assin2 dataset."""
 
+from tensorflow_datasets.datasets.assin2 import assin2_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering import ai2_arc
 
 
-class Ai2ArcTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ai2_arc.Ai2Arc
-  BUILDER_CONFIG_NAMES_TO_TEST = ["ARC-Easy"]
+class Assin2Test(tfds.testing.DatasetBuilderTestCase):
+  """Tests for assin2 dataset."""
+  DATASET_CLASS = assin2_dataset_builder.Builder
   SPLITS = {
-      "train": 3,
-      "validation": 3,
-      "test": 3,
+      'train': 5,
+      'validation': 5,
+      'test': 5,
+  }
+  DL_EXTRACT_RESULT = {
+      'train': 'assin2-train-only.xml',
+      'validation': 'assin2-dev.xml',
+      'test': 'assin2-test.xml'
   }
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   tfds.testing.test_main()
