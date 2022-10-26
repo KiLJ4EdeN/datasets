@@ -13,20 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for amazon_us_reviews dataset module."""
+"""Test for Annotated Enron Subject Line Corpus Dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.structured import amazon_us_reviews
+from tensorflow_datasets.datasets.aeslc import aeslc_dataset_builder
 
 
-class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = amazon_us_reviews.AmazonUSReviews
-  BUILDER_CONFIG_NAMES_TO_TEST = ["Apparel_v1_00"]
+class AeslcTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = aeslc_dataset_builder.Builder
   SPLITS = {
-      "train": 5,
+      "train": 1,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
+      "test": 1,  # Number of fake test example
   }
-
-  DL_EXTRACT_RESULT = "test.tsv"
+  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":

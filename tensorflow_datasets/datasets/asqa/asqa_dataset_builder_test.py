@@ -13,23 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for ANLI dataset module."""
+"""asqa dataset."""
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.text import anli
+from tensorflow_datasets.datasets.asqa import asqa_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-class AnliTest(testing.DatasetBuilderTestCase):
-
-  BUILDER_CONFIG_NAMES_TO_TEST = ["r3"]
-
-  DATASET_CLASS = anli.Anli
+class AsqaTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for asqa dataset."""
+  DATASET_CLASS = asqa_dataset_builder.Builder
   SPLITS = {
-      "validation": 2,  # Number of fake validation examples
-      "test": 2,  # Number of fake test examples
-      "train": 2,  # Number of fake train examples
+      'train': 2,
+      'dev': 1,
   }
 
+  DL_EXTRACT_RESULT = 'ASQA.json'
 
-if __name__ == "__main__":
-  testing.test_main()
+
+if __name__ == '__main__':
+  tfds.testing.test_main()

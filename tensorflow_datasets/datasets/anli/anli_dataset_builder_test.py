@@ -13,18 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""AccentDB dataset."""
+"""Test for ANLI dataset module."""
 
-from tensorflow_datasets.audio import accentdb
-import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.anli import anli_dataset_builder
 
 
-class AccentdbTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = accentdb.Accentdb
+class AnliTest(testing.DatasetBuilderTestCase):
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ["r3"]
+
+  DATASET_CLASS = anli_dataset_builder.Builder
   SPLITS = {
-      "train": 1,
+      "validation": 2,  # Number of fake validation examples
+      "test": 2,  # Number of fake test examples
+      "train": 2,  # Number of fake train examples
   }
 
 
 if __name__ == "__main__":
-  tfds.testing.test_main()
+  testing.test_main()
