@@ -13,19 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for AG News dataset."""
+"""Test for Annotated Enron Subject Line Corpus Dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import ag_news_subset
+from tensorflow_datasets.datasets.aeslc import aeslc_dataset_builder
 
 
-class AgNewsSubsetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ag_news_subset.AGNewsSubset
+class AeslcTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = aeslc_dataset_builder.Builder
   SPLITS = {
-      "train": 3,  # Number of fake train examples
-      "test": 2,  # Number of fake test examples
+      "train": 1,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
+      "test": 1,  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = {"ag_news_csv": ""}
+  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":

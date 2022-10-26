@@ -13,21 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for Annotated Enron Subject Line Corpus Dataset."""
+"""AccentDB dataset."""
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import aeslc
+from tensorflow_datasets.datasets.accentdb import accentdb_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-class AeslcTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = aeslc.Aeslc
+class AccentdbTest(tfds.testing.DatasetBuilderTestCase):
+  DATASET_CLASS = accentdb_dataset_builder.Builder
   SPLITS = {
-      "train": 1,  # Number of fake train example
-      "validation": 1,  # Number of fake validation example
-      "test": 1,  # Number of fake test example
+      "train": 1,
   }
-  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds.testing.test_main()
