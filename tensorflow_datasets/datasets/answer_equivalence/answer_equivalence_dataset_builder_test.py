@@ -13,24 +13,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""assin2 dataset."""
+"""answer_equivalence dataset."""
 
+from tensorflow_datasets.datasets.answer_equivalence import answer_equivalence_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.assin2 import assin2
 
 
-class Assin2Test(tfds.testing.DatasetBuilderTestCase):
-  """Tests for assin2 dataset."""
-  DATASET_CLASS = assin2.Assin2
+class AnswerEquivalenceTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for answer_equivalence dataset."""
+  DATASET_CLASS = answer_equivalence_dataset_builder.Builder
   SPLITS = {
-      'train': 5,
-      'validation': 5,
-      'test': 5,
+      'train': 3,
+      'ae_dev': 1,
+      'ae_test': 1,
+      'dev_xlnet': 1,
+      'dev_luke': 1,
+      'dev_bidaf': 1,
   }
+
   DL_EXTRACT_RESULT = {
-      'train': 'assin2-train-only.xml',
-      'validation': 'assin2-dev.xml',
-      'test': 'assin2-test.xml'
+      'train': 'dummy_data_train.jsonl',
+      'ae_dev': 'dummy_data_ae_dev.jsonl',
+      'ae_test': 'dummy_data_ae_test.jsonl',
+      'dev_xlnet': 'dev_by_system/dummy_data_dev_xlnet.jsonl',
+      'dev_luke': 'dev_by_system/dummy_data_dev_luke.jsonl',
+      'dev_bidaf': 'dev_by_system/dummy_data_dev_bidaf.jsonl'
   }
 
 

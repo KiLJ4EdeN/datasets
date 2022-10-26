@@ -13,18 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""AccentDB dataset."""
+"""assin2 dataset."""
 
-from tensorflow_datasets.audio import accentdb
+from tensorflow_datasets.datasets.assin2 import assin2_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class AccentdbTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = accentdb.Accentdb
+class Assin2Test(tfds.testing.DatasetBuilderTestCase):
+  """Tests for assin2 dataset."""
+  DATASET_CLASS = assin2_dataset_builder.Builder
   SPLITS = {
-      "train": 1,
+      'train': 5,
+      'validation': 5,
+      'test': 5,
+  }
+  DL_EXTRACT_RESULT = {
+      'train': 'assin2-train-only.xml',
+      'validation': 'assin2-dev.xml',
+      'test': 'assin2-test.xml'
   }
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   tfds.testing.test_main()

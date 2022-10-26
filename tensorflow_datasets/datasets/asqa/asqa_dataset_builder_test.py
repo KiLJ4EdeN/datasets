@@ -13,13 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for amazon_us_reviews.
+"""asqa dataset."""
 
-DEPRECATED!
-If you want to use the AmazonUSReviews dataset builder class, use:
-tfds.builder_cls('amazon_us_reviews')
-"""
+from tensorflow_datasets.datasets.asqa import asqa_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
-from tensorflow_datasets.core import lazy_builder_import
 
-AmazonUSReviews = lazy_builder_import.LazyBuilderImport('amazon_us_reviews')
+class AsqaTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for asqa dataset."""
+  DATASET_CLASS = asqa_dataset_builder.Builder
+  SPLITS = {
+      'train': 2,
+      'dev': 1,
+  }
+
+  DL_EXTRACT_RESULT = 'ASQA.json'
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
